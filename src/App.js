@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="gray-background">
         <img src={logo} lat="logo"/>
-        <h2>Let's develope management system!</h2>
+        <h2>Let's develope manaasdgement system!asd</h2>
       </div>
     );
   }
