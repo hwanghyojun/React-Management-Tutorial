@@ -12,46 +12,40 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: "auto"
   },
   table: {
     minWidth: 1080
   }
-})
+});
 
-
-const customer =[
-  {
-  'id':'1',
-  'img':'https://placeimg.com/64/64/1',
-  'name':'홍길동',
-  'gender':'남자',
-  'job':'디자이너'
-},
-{
-  'id':'2',
-  'img':'https://placeimg.com/64/64/2',
-  'name':'이순신',
-  'gender':'남자',
-  'job':'격투가'
-},
-{
-  'id':'3',
-  'img':'https://placeimg.com/64/64/3',
-  'name':'춘향이',
-  'gender':'여자',
-  'job':'간호사'
-}
-]
 
 class App extends Component {
+
+  state = {
+    customers: ""
+  }
+
+  //api서버에  접근해서 데이터를 받아오는 작업은 여기서
+  componentDidMount() {
+    this.callApi()
+    .then(res => this.setState({customers: res}))
+    .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
+  }
+
+
   render() {
     const { classes } = this.props;
     return (
       <Paper className={classes.root}>
-        <Table calssName={classes.table}>
-          
+        <Table className={classes.table}> 
           <TableHead>
             <TableRow>
               <TableCell>번호</TableCell>
@@ -63,8 +57,8 @@ class App extends Component {
             </TableRow>
           </TableHead>
 
-          <TableBody>{
-          customer.map(c => {
+          <TableBody>
+            {this.state.customers ? this.state.customers.map(c => {
             return(
               <Customer
               key={c.id}
@@ -75,8 +69,7 @@ class App extends Component {
               job={c.job}
               />
             )
-          })
-        }</TableBody>
+          }) : ""}</TableBody>
         </Table>
       </Paper>
     );
