@@ -56,13 +56,13 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <Paper className={classes.root}>
-        <Table className={classes.table}> 
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>번호</TableCell>
-              <TableCell>이미지</TableCell>
               <TableCell>아이디</TableCell>
+              <TableCell>이미지</TableCell>
               <TableCell>이름</TableCell>
+              <TableCell>생년월일</TableCell>
               <TableCell>성별</TableCell>
               <TableCell>직업</TableCell>
             </TableRow>
@@ -75,6 +75,7 @@ class App extends Component {
               key={c.id}
               img={c.img}
               id={c.id}
+              birthday={c.birthday}
               name={c.name}
               gender={c.gender}
               job={c.job}
